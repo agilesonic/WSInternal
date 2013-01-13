@@ -1,3 +1,4 @@
 WSInternal::Application.routes.draw do
-  resources :extjs
+  get 'wsis/index' 
+  resources :clients, :only => ['show']
 end

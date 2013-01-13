@@ -1,6 +1,6 @@
-Ext.define('AM.view.user.Edit', {
+Ext.define('AM.view.client.Edit', {
     extend: 'Ext.window.Window',
-    alias : 'widget.useredit',
+    alias : 'widget.clientedit',
 
     requires: ['Ext.form.Panel'],
 
