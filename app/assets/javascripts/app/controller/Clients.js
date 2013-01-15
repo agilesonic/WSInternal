@@ -8,8 +8,15 @@ Ext.define('AM.controller.Clients', {
     views: ['clients.List'],
 
     init: function() {
-//    	this.getClientsStore().load();
-    	alert('loaded');
+    	this.getClientsStore().load({
+		    scope: this,
+		    params: {
+		    	keyword: 'Richard'
+		    },
+		    callback: function(records, operation, success) {
+				console.log('Keyword: ' + operation.params.keyword + ' Count: ' + records.length);		    	
+		    }
+    	});
     },
 
 });

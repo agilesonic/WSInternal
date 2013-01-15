@@ -1,15 +1,14 @@
 Ext.define('AM.store.Clients', {
     extend: 'Ext.data.Store',
     model: 'AM.model.Client',
-    autoLoad: true,
+//    autoLoad: true,
     
     proxy: {
-        type: 'rest',
-        url: '/clients',
+        type: 'ajax',
+        url: '/clients/search',
         reader: {
             type: 'json',
             root: 'clients',
-            idProperty: 'CFID',
             successProperty: 'success'
         }
     }
