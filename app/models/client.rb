@@ -5,8 +5,17 @@ class Client < ActiveRecord::Base
   has_many :jobs, :through => :properties
   has_many :done_jobs, :class_name => "Job", :through => :properties, :conditions => "datebi is not null", :source => :jobs
   
-  def self.search(key) 
-    where("lastname like ? or firstname like ? or address like ? or phone like ?", "%#{key}%", "%#{key}%", "%#{key}%", "%#{key}%").order("lastname, firstname") 
+  def self.search(key)
+    if key.size <= 10 
+      if key.start_with? "CF"
+        key = Utils.full_id(key)
+        return find(key)
+      elsif key.start_with? "JB"
+        key = Utils.full_id(key)
+        return Client.join(:jobs).where(:jobs => {:JobID => key})
+      end
+    end
+    where("lastname like ? or firstname like ? or address like ? or phone like ?", "%#{key}%", "%#{key}%", "%#{key}%", "%#{key}%").order("lastname, firstname").limit(100)
   end
 
   def full_name
