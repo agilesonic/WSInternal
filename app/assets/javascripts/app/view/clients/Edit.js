@@ -27,6 +27,7 @@ Ext.define('AM.view.clients.Edit', {
 
     buttons: [{
         text: 'Save',
+        id: 'btnSave',
         action: 'save'
     },
     {
@@ -38,7 +39,6 @@ Ext.define('AM.view.clients.Edit', {
     client: null,
     
     initComponent: function() {
-    	this.setClient(this.getInitialConfig().client);
     	this.callParent(arguments);
     },
     
@@ -47,11 +47,20 @@ Ext.define('AM.view.clients.Edit', {
     	if( this.client ) {
 			this.child("[name='firstName']").setValue(this.client.firstname);    		
 			this.child("[name='lastName']").setValue(this.client.lastname);    		
-			this.child("[name='email']").setValue(this.client.email);    		
+			this.child("[name='email']").setValue(this.client.email);
+			this.setTitle("Client: " + this.client.firstname + " " + this.client.lastname);   		
     	} else {
 			this.child("[name='firstName']").setValue('');    		
 			this.child("[name='lastName']").setValue('');    		
 			this.child("[name='email']").setValue('');    		
+			this.setTitle("Client detail");   		
     	}
+    },
+    
+    updateClient: function() {
+    	this.client.firstname = this.child("[name='firstName']").getValue();
+    	this.client.lastname = this.child("[name='lastName']").getValue();
+    	this.client.email = this.child("[name='email']").getValue();
+    	return this.client;
     }
 });

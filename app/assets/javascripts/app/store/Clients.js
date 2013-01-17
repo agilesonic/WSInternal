@@ -13,3 +13,12 @@ Ext.define('AM.store.Clients', {
         }
     }
 });
+/*
+var clientUpdater = Ext.create('Ext.data.proxy', {
+	type: 'rest',
+	url: '/clients',
+	writer: {
+		type: 'json'
+	}
+});
+*/

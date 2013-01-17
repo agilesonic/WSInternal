@@ -26,6 +26,9 @@ Ext.define('AM.controller.Clients', {
     		},
     		'viewport clientlist': {
     			itemclick: this.showClientDetail
+    		},
+    		'clientedit #btnSave': {
+    			click: this.saveClientDetail
     		}
     	});
     },
@@ -43,11 +46,28 @@ Ext.define('AM.controller.Clients', {
     },
     
     showClientDetail: function(grid, record) {
-    	client = record.data;
-    	this.getMainTabPanel().add({
-    		xtype: 'clientedit',
-    		client: client
-    	}).show();
+    	var client = record.data;
+    	var clientPanel = this.getMainTabPanel().add({
+    		xtype: 'clientedit'
+    	});
+    	clientPanel.setClient(client);
+    	clientPanel.show();
+    },
+    
+    saveClientDetail: function() {
+    	var clientPanel = this.getMainTabPanel().getActiveTab();
+    	var client = clientPanel.updateClient();
+    	var ClientModel = Ext.ModelManager.getModel('AM.model.Client');
+    	ClientModel.load(client.CFID, {
+    		success: function(c) {
+		    	c.set('firstname', client.firstname);
+		    	c.set('lastname', client.lastname);
+		    	c.set('email', client.email);
+		    	alert(c.get('firstname'));
+		    	c.save();
+		    }
+    	});
+    	//this.getClientsStore().sync();
     }
 
 });
