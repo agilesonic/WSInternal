@@ -12,7 +12,7 @@ class Client < ActiveRecord::Base
         return find(key)
       elsif key.start_with? "JB"
         key = Utils.full_id(key)
-        return Client.join(:jobs).where(:jobs => {:JobID => key})
+        return Client.joins(:jobs).where(:jobs => {:JobID => key})
       end
     end
     where("lastname like ? or firstname like ? or address like ? or phone like ?", "%#{key}%", "%#{key}%", "%#{key}%", "%#{key}%").order("lastname, firstname").limit(100)

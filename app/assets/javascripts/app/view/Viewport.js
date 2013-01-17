@@ -2,12 +2,22 @@ Ext.define('AM.view.Viewport', {
     extend: 'Ext.container.Viewport',
 
     layout: {
-    	type: 'vbox',
-    	align: 'stretch'
+    	type: 'fit'
     },
     items: [{
-    	xtype: 'clientsearch',
-    }, {
-        xtype: 'clientlist'
+    	xtype: 'tabpanel',
+    	activetab: 0,
+    	items: [{
+    		layout: {
+    			type: 'vbox',
+    			align: 'stretch'
+    		},
+    		title: 'Smart Search',
+    		items: [{
+    			xtype: 'clientsearch'
+    		}, {
+    			xtype: 'clientlist'
+    		}]
+    	}]
     }]
 });

@@ -5,7 +5,12 @@ Ext.define('AM.controller.Clients', {
 
     models: ['Client'],
 
-    views: ['clients.List', 'clients.Search'],
+    views: ['clients.List', 'clients.Search', 'clients.Edit'],
+    
+    refs: [{
+    	ref: 'mainTabPanel',
+    	selector: 'tabpanel'
+    }],
 
     init: function() {
     	this.control({
@@ -18,6 +23,9 @@ Ext.define('AM.controller.Clients', {
     					this.onSearch();
     				}
     			}
+    		},
+    		'viewport clientlist': {
+    			itemclick: this.showClientDetail
     		}
     	});
     },
@@ -32,6 +40,14 @@ Ext.define('AM.controller.Clients', {
 				console.log('Keyword: ' + operation.params.keyword + ' Count: ' + records.length);		    	
 		    }
     	});
+    },
+    
+    showClientDetail: function(grid, record) {
+    	client = record.data;
+    	this.getMainTabPanel().add({
+    		xtype: 'clientedit',
+    		client: client
+    	}).show();
     }
 
 });
