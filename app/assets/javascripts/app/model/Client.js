@@ -1,4 +1,10 @@
-Ext.define('AM.model.Client', {
+Ext.define('WSIS.model.ClientSearchResult', {
+    extend: 'Ext.data.Model',
+    fields: ['CFID', 'name', 'address', 'phone', 'valid', 'properties'],
+    idProperty: 'CFID'
+});
+
+Ext.define('WSIS.model.ClientDetail', {
     extend: 'Ext.data.Model',
     fields: ['CFID', 'firstname', 'lastname', 'email'],
     idProperty: 'CFID',

@@ -1,4 +1,4 @@
-Ext.define('AM.view.clients.Search', {
+Ext.define('WSIS.view.clients.Search', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.clientsearch',
 

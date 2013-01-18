@@ -24,9 +24,20 @@ class ClientsController < ApplicationController
   
   def search
     clients = Client.search(params[:keyword])
+    results = []
+    clients.each do |client|
+      results << { 
+        :CFID => client.CFID,
+        :name => client.full_name,
+        :address => client.address,
+        :phone => client.phone, # to do: first valid phone
+        :valid => true, # to do
+        :properties => 'Something'  # to do
+      }
+    end
     render :json => {
       :success => true,
-      :clients => clients 
+      :clients => results 
     }
   end
 end  

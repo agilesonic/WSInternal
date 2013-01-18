@@ -1,4 +1,4 @@
-Ext.define('AM.view.Viewport', {
+Ext.define('WSIS.view.Viewport', {
     extend: 'Ext.container.Viewport',
 
     layout: {
@@ -7,17 +7,22 @@ Ext.define('AM.view.Viewport', {
     items: [{
     	xtype: 'tabpanel',
     	activetab: 0,
-    	items: [{
+    	items: [
+/*    	
+    	{
     		layout: {
     			type: 'vbox',
     			align: 'stretch'
     		},
     		title: 'Smart Search',
+    		id: 'smartSearch',
     		items: [{
     			xtype: 'clientsearch'
     		}, {
     			xtype: 'clientlist'
     		}]
-    	}]
+    	}
+*/    	
+    	]
     }]
 });

@@ -1,4 +1,4 @@
-Ext.define('AM.view.clients.List', {
+Ext.define('WSIS.view.clients.List', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.clientlist',
 
@@ -7,9 +7,12 @@ Ext.define('AM.view.clients.List', {
 
     columns: [
     
-        {header: 'First Name',  dataIndex: 'firstname',  flex: 1},
-        {header: 'Last Name',  dataIndex: 'lastname',  flex: 1},
-        {header: 'Email', dataIndex: 'email', flex: 1}
+        {header: 'CFID',  dataIndex: 'CFID',  flex: 1},
+        {header: 'Name',  dataIndex: 'name',  flex: 1},
+        {header: 'Address',  dataIndex: 'address',  flex: 1},
+        {header: 'Phone', dataIndex: 'phone', flex: 1},
+        {header: 'Phone', dataIndex: 'valid', flex: 1},
+        {header: 'Properties', dataIndex: 'properties', flex: 1}
         
     ]
     

@@ -1,5 +1,5 @@
 Ext.application({
-    name: 'AM',
+    name: 'WSIS',
 	appFolder: '/assets/app',
 
     // automatically create an instance of AM.view.Viewport
@@ -10,5 +10,6 @@ Ext.application({
     ],
     
     launch: function() {
+    	alert('launch');
     }
 });

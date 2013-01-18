@@ -1,7 +1,6 @@
-Ext.define('AM.store.Clients', {
+Ext.define('WSIS.store.Clients', {
     extend: 'Ext.data.Store',
-    model: 'AM.model.Client',
-//    autoLoad: true,
+    model: 'WSIS.model.ClientSearchResult',
     
     proxy: {
         type: 'ajax',
@@ -13,12 +12,3 @@ Ext.define('AM.store.Clients', {
         }
     }
 });
-/*
-var clientUpdater = Ext.create('Ext.data.proxy', {
-	type: 'rest',
-	url: '/clients',
-	writer: {
-		type: 'json'
-	}
-});
-*/
