@@ -63,7 +63,6 @@ Ext.define('AM.controller.Clients', {
 		    	c.set('firstname', client.firstname);
 		    	c.set('lastname', client.lastname);
 		    	c.set('email', client.email);
-		    	alert(c.get('firstname'));
 		    	c.save();
 		    }
     	});

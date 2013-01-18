@@ -12,7 +12,8 @@ Ext.define('AM.model.Client', {
             successProperty: 'success'
         },
         writer: {
-        	type: 'json'
+        	type: 'json',
+        	root: 'client'
         }
     }
     
