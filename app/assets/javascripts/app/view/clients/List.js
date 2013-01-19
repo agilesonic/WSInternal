@@ -11,7 +11,7 @@ Ext.define('WSIS.view.clients.List', {
         {header: 'Name',  dataIndex: 'name',  flex: 1},
         {header: 'Address',  dataIndex: 'address',  flex: 1},
         {header: 'Phone', dataIndex: 'phone', flex: 1},
-        {header: 'Phone', dataIndex: 'valid', flex: 1},
+        {header: 'Valid ?', dataIndex: 'valid', flex: 1, xtype: 'booleancolumn', trueText: 'Yes', falseText: 'No'},
         {header: 'Properties', dataIndex: 'properties', flex: 1}
         
     ]

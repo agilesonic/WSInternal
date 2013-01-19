@@ -10,6 +10,5 @@ Ext.application({
     ],
     
     launch: function() {
-    	alert('launch');
     }
 });

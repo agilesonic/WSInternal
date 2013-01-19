@@ -1,6 +1,6 @@
 Ext.define('WSIS.view.clients.Search', {
     extend: 'Ext.toolbar.Toolbar',
-    alias: 'widget.clientsearch',
+    alias: 'widget.smartsearch',
 
     items: [{
     		xtype: 'label',

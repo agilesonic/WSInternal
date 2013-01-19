@@ -1,25 +1,23 @@
 Ext.define('WSIS.controller.Clients', {
     extend: 'Ext.app.Controller',
-/*
+    
+    models: ['ClientSearchResult', 'ClientDetail'],
+
     stores: ['Clients'],
 
-    models: ['Client'],
-
     views: ['clients.List', 'clients.Search', 'clients.Edit'],
-    
+
     refs: [{
     	ref: 'mainTabPanel',
     	selector: 'tabpanel'
     }],
-*/
+
     init: function() {
-    	alert('init');
-/*    	
     	this.control({
-    		'clientsearch button': {
+    		'smartsearch button': {
     			click: this.onSearch
     		},
-    		'clientsearch textfield' : {
+    		'smartsearch textfield' : {
     			specialkey: function(field, event) {
     				if( event.getKey() == event.ENTER ) {
     					this.onSearch();
@@ -33,14 +31,13 @@ Ext.define('WSIS.controller.Clients', {
     			click: this.saveClientDetail
     		}
     	});
-*/    	
     },
     
     onSearch: function() {
     	this.getClientsStore().load({
 		    scope: this,
 		    params: {
-		    	keyword: Ext.ComponentQuery.query('clientsearch').child('textfield').getValue()
+		    	keyword: Ext.ComponentQuery.query('smartsearch')[0].child('textfield').getValue()
 		    },
 		    callback: function(records, operation, success) {
 				console.log('Keyword: ' + operation.params.keyword + ' Count: ' + records.length);		    	
@@ -53,16 +50,19 @@ Ext.define('WSIS.controller.Clients', {
     	var clientPanel = this.findPanel(client.CFID);
     	if( !clientPanel ) {
     		this.loadClient(client.CFID, {
-    			success: function(c) {
+    			scope: this,
+    			success: function(record) {
 		    		clientPanel = this.getMainTabPanel().add({
 			    		xtype: 'clientedit',
 			    		id: client.CFID
 			    	});
-			    	clientPanel.setClient(c);
+			    	clientPanel.setClient(record.data);
+			    	clientPanel.show();
     			}  
     		}) 
-	    }
-    	clientPanel.show();
+	    } else {
+    		clientPanel.show();
+    	}
     },
     
     saveClientDetail: function() {
