@@ -4,7 +4,7 @@ Ext.define('WSIS.view.clients.Search', {
 
 	title: 'Smart Search',
 	
-	layout: 'fit',
+	layout: 'border',
 
 	tbar: [{
 		xtype: 'label',
@@ -21,7 +21,20 @@ Ext.define('WSIS.view.clients.Search', {
 	}],
 	
     items: [{
+    	xtype: 'panel',
+    	id: 'resultMsg',
+    	tpl: '<h1>Found {result_size} client(s) matching \'{keyword}\'</h1>',
+    	data: {
+    		result_size: 0,
+    		keyword: ''
+    	},
+    	style: {
+    		padding: 10
+    	},
+    	region: 'north'
+    }, {
     	xtype: 'grid',
+    	region: 'center',
 	    store: 'Clients',
 	
 	    columns: [

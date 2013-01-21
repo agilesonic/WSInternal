@@ -34,13 +34,17 @@ Ext.define('WSIS.controller.Clients', {
     },
     
     onSearch: function() {
+    	var keyword = Ext.ComponentQuery.query('smartsearch toolbar')[0].child('textfield').getValue();
     	this.getClientsStore().load({
 		    scope: this,
 		    params: {
-		    	keyword: Ext.ComponentQuery.query('smartsearch toolbar')[0].child('textfield').getValue()
+		    	keyword: keyword
 		    },
 		    callback: function(records, operation, success) {
-				console.log('Keyword: ' + operation.params.keyword + ' Count: ' + records.length);		    	
+				Ext.ComponentQuery.query('smartsearch')[0].child('#resultMsg').update({
+					result_size: records.length,
+					keyword: keyword
+				});		    	
 		    }
     	});
     },
