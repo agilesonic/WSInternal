@@ -14,10 +14,10 @@ Ext.define('WSIS.controller.Clients', {
 
     init: function() {
     	this.control({
-    		'smartsearch button': {
+    		'smartsearch toolbar button': {
     			click: this.onSearch
     		},
-    		'smartsearch textfield' : {
+    		'smartsearch toolbar textfield' : {
     			specialkey: function(field, event) {
     				if( event.getKey() == event.ENTER ) {
     					this.onSearch();
@@ -37,7 +37,7 @@ Ext.define('WSIS.controller.Clients', {
     	this.getClientsStore().load({
 		    scope: this,
 		    params: {
-		    	keyword: Ext.ComponentQuery.query('smartsearch')[0].child('textfield').getValue()
+		    	keyword: Ext.ComponentQuery.query('smartsearch toolbar')[0].child('textfield').getValue()
 		    },
 		    callback: function(records, operation, success) {
 				console.log('Keyword: ' + operation.params.keyword + ' Count: ' + records.length);		    	

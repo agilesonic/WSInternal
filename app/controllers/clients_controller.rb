@@ -26,13 +26,21 @@ class ClientsController < ApplicationController
     clients = Client.search(params[:keyword])
     results = []
     clients.each do |client|
+      properties = []
+      client.properties.each do |p|
+        properties << {
+          id: p.JobInfoID,
+          address: p.address,
+          valid: p.validuntil.nil?
+        }  
+      end
       results << { 
         :CFID => client.CFID,
         :name => client.full_name,
         :address => client.address,
         :phone => client.phone, # to do: first valid phone
-        :valid => true, # to do
-        :properties => 'Something'  # to do
+        :valid => client.validuntil.nil?,
+        :properties => properties 
       }
     end
     render :json => {

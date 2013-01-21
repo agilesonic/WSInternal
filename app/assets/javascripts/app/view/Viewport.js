@@ -8,17 +8,8 @@ Ext.define('WSIS.view.Viewport', {
     	xtype: 'tabpanel',
     	activetab: 0,
     	items: [{
-    		layout: {
-    			type: 'vbox',
-    			align: 'stretch'
-    		},
-    		title: 'Smart Search',
     		id: 'smartSearch',
-    		items: [{
-    			xtype: 'smartsearch'
-    		}, {
-    			xtype: 'clientlist'
-    		}]
+    		xtype: 'smartsearch'
     	}]
     }]
 });

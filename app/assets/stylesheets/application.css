@@ -11,3 +11,15 @@
  *= require_self
  *= require_tree .
  */
+.even-row {
+	background-color: #c6edee
+}
+.odd-row {
+	background-color: #e8f9f9
+}
+.even-row td.x-grid-cell, .odd-row td.x-grid-cell {
+	background: transparent 
+}
+.invalid-row {
+	color: #ee4985
+}
