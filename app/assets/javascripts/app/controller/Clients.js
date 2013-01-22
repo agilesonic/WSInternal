@@ -5,7 +5,7 @@ Ext.define('WSIS.controller.Clients', {
 
     stores: ['Clients'],
 
-    views: ['clients.List', 'clients.Search', 'clients.Edit'],
+    views: ['clients.Search', 'clients.Edit'],
 
     refs: [{
     	ref: 'mainTabPanel',
@@ -24,7 +24,7 @@ Ext.define('WSIS.controller.Clients', {
     				}
     			}
     		},
-    		'clientlist': {
+    		'smartsearch grid': {
     			itemclick: this.showClientDetail
     		},
     		'clientedit #btnSave': {
@@ -41,10 +41,12 @@ Ext.define('WSIS.controller.Clients', {
 		    	keyword: keyword
 		    },
 		    callback: function(records, operation, success) {
-				Ext.ComponentQuery.query('smartsearch')[0].child('#resultMsg').update({
+		    	var resultMsg = Ext.ComponentQuery.query('smartsearch')[0].down('#resultMsg');
+		    	resultMsg.update({
 					result_size: records.length,
 					keyword: keyword
-				});		    	
+				});
+				resultMsg.show();
 		    }
     	});
     },

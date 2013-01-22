@@ -2,32 +2,57 @@ Ext.define('WSIS.view.clients.Edit', {
     extend: 'Ext.panel.Panel',
     alias : 'widget.clientedit',
     
-    layout: 'vbox',
+    layout: 'border',
     closable: true,
     title : 'Client details',
+    border: 0,
     
    	padding: '5 5 0 5',
    	
    	items: [{
+   		xtype: 'panel',
+   		id: 'overview',
+   		region: 'north',
+   		tpl: '<h1>{fullName}</h1><h2>{status}&nbsp;&nbsp;&nbsp;Rate: {rate}</h2><hr/>',
+   		data: {
+   			fullName: '',
+   			status: '',
+   			rate: 0.0
+   		},
+   		border: 0,
+   		hidden: true
+   	}, {
    		xtype: 'form',
+   		region: 'center',
 	    buttonAlign: 'left',
 	    border: 0,
 	
 	    items: [{
-	        xtype: 'textfield',
-	        name : 'firstName',
-	        fieldLabel: 'First Name'
-	    },
-	    {
-	        xtype: 'textfield',
-	        name : 'lastName',
-	        fieldLabel: 'Last Name'
-	    },
-	    {
-	        xtype: 'textfield',
-	        name : 'email',
-	        fieldLabel: 'Email'
+	    	layout: 'hbox',
+	    	border: 0,
+	    	items: [{
+		        xtype: 'textfield',
+		        name : 'honorific',
+		        fieldLabel: 'Honorific'
+		    }, {
+		        xtype: 'textfield',
+		        name : 'firstName',
+		        fieldLabel: 'First Name'
+		    }, {
+		        xtype: 'textfield',
+		        name : 'lastName',
+		        fieldLabel: 'Last Name'
+		    }]
+	    }, {
+	    	layout: 'hbox',
+	    	border: 0,
+	    	items: [{
+		        xtype: 'textfield',
+		        name : 'email',
+		        fieldLabel: 'Email'
+	    	}]
 	    }],
+	    
 	    buttons: [{
 	        text: 'Save',
 	        id: 'btnSave',
@@ -36,9 +61,10 @@ Ext.define('WSIS.view.clients.Edit', {
 	        text: 'Cancel',
 	        scope: this,
 	        handler: this.close
-	    }]
-   	}],
+	    }],
     
+   	}],
+
     client: null,
     
     initComponent: function() {
@@ -47,25 +73,34 @@ Ext.define('WSIS.view.clients.Edit', {
     
     setClient: function(c) {
     	this.client = c;
-    	var form = this.child('form');
     	if( this.client ) {
-			form.child("[name='firstName']").setValue(this.client.firstname);    		
-			form.child("[name='lastName']").setValue(this.client.lastname);    		
-			form.child("[name='email']").setValue(this.client.email);
-			this.setTitle(this.client.CFID + " " + this.client.firstname + " " + this.client.lastname);   		
+			this.down("[name='honorific']").setValue(this.client.honorific);    		
+			this.down("[name='firstName']").setValue(this.client.firstname);    		
+			this.down("[name='lastName']").setValue(this.client.lastname);    		
+			this.down("[name='email']").setValue(this.client.email);
+			this.setTitle(this.client.CFID + " " + this.client.firstname + " " + this.client.lastname);
+			this.child('#overview').update({
+				fullName: this.client.full_name,
+				status: this.client.status,
+				rate: this.client.rate
+			});
+			
+			this.child('#overview').show();
     	} else {
-			form.child("[name='firstName']").setValue('');    		
-			form.child("[name='lastName']").setValue('');    		
-			form.child("[name='email']").setValue('');    		
-			this.setTitle("Client detail");   		
+			this.down("[name='honorific']").setValue('');    		
+			this.down("[name='firstName']").setValue('');    		
+			this.down("[name='lastName']").setValue('');    		
+			this.down("[name='email']").setValue('');    		
+			this.setTitle("Client detail"); 
+			this.child('#overview').hide();		
     	}
     },
     
     updateClient: function() {
-    	var form = this.child('form');
-    	this.client.firstname = form.child("[name='firstName']").getValue();
-    	this.client.lastname = form.child("[name='lastName']").getValue();
-    	this.client.email = form.child("[name='email']").getValue();
+    	this.client.honorific = this.down("[name='honorific']").getValue();
+    	this.client.firstname = this.down("[name='firstName']").getValue();
+    	this.client.lastname = this.down("[name='lastName']").getValue();
+    	this.client.email = this.down("[name='email']").getValue();
     	return this.client;
     }
 });

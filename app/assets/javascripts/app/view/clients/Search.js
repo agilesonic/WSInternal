@@ -28,6 +28,7 @@ Ext.define('WSIS.view.clients.Search', {
     		result_size: 0,
     		keyword: ''
     	},
+    	hidden: true,
     	style: {
     		padding: 10
     	},

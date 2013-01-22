@@ -23,3 +23,12 @@
 .invalid-row {
 	color: #ee4985
 }
+
+#overview h1 {
+	font-size: 1.5em; 
+}
+#overview h2 {
+	font-size: 1em; 
+}
+
+

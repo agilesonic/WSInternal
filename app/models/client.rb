@@ -1,4 +1,7 @@
 class Client < ActiveRecord::Base
+  STATUS_NORMAL = 'Normal'
+  STATUS_MOVED = 'MOVED'
+  
   set_table_name "cfinfo"
   has_many :properties, :foreign_key => "cfid", :inverse_of => :client
   has_many :valid_properties, :class_name => "Property", :foreign_key => "cfid", :conditions => "validuntil is null or validuntil = \'\'"
@@ -24,5 +27,21 @@ class Client < ActiveRecord::Base
     s << firstname + ' ' unless firstname.nil?
     s << lastname unless lastname.nil?
     s.strip
+  end
+  
+  def status
+    if validuntil.nil?
+      return STATUS_NORMAL
+    else
+      return STATUS_MOVED
+    end
+  end
+  
+  def rate
+    return 4.0    
+  end
+  
+  def as_json(options={})
+    super(:methods => [:full_name, :status, :rate])
   end
 end
