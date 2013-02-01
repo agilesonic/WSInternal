@@ -5,7 +5,7 @@ Ext.define('WSIS.controller.Clients', {
 
     stores: ['Clients'],
 
-    views: ['clients.Search', 'clients.Edit'],
+    views: ['clients.Search', 'clients.Edit', 'Map'],
 
     refs: [{
     	ref: 'mainTabPanel',
@@ -29,6 +29,9 @@ Ext.define('WSIS.controller.Clients', {
     		},
     		'clientedit #btnSave': {
     			click: this.saveClientDetail
+    		},
+    		'clientedit #btnMap': {
+    			click: this.showAddressMap
     		}
     	});
     },
@@ -53,14 +56,14 @@ Ext.define('WSIS.controller.Clients', {
     
     showClientDetail: function(grid, record) {
     	var client = record.data;
-    	var clientPanel = this.findPanel(client.CFID);
+    	var clientPanel = this.findPanel('clientedit', client.CFID);
     	if( !clientPanel ) {
     		this.loadClient(client.CFID, {
     			scope: this,
     			success: function(record) {
 		    		clientPanel = this.getMainTabPanel().add({
 			    		xtype: 'clientedit',
-			    		id: client.CFID
+			    		id: 'clientedit' + '-' + client.CFID
 			    	});
 			    	clientPanel.setClient(record.data);
 			    	clientPanel.show();
@@ -88,10 +91,10 @@ Ext.define('WSIS.controller.Clients', {
     	});
     },
     
-    findPanel: function(id) {
+    findPanel: function(xtype, id) {
     	var p = null;
     	Ext.each(this.getMainTabPanel().items.items, function(panel) {
-    		if( panel.xtype == 'clientedit' && panel.id == id ) {
+    		if( panel.id == xtype + '-' + id ) {
     			p = panel;
     			return false;
     		}
@@ -102,6 +105,21 @@ Ext.define('WSIS.controller.Clients', {
     loadClient: function(cfid, opt) {
     	var ClientModel = Ext.ModelManager.getModel('WSIS.model.ClientDetail');
     	ClientModel.load(cfid, opt);
+    },
+    
+    showAddressMap: function() {
+    	var client = this.getMainTabPanel().getActiveTab().client;
+    	var mapPanel = this.findPanel('map', client.CFID);
+    	if( mapPanel == null ) {
+			mapPanel = this.getMainTabPanel().add({
+	    		xtype: 'map',
+	    		id: 'map-' + client.CFID
+	    	});
+	    	mapPanel.show();
+	    	mapPanel.setAddress(client.full_address);
+	    } else {
+    		mapPanel.show();
+    	}
     }
 
 });

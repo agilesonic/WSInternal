@@ -37,11 +37,23 @@ class Client < ActiveRecord::Base
     end
   end
   
+  def rate_info
+    ClientRate.find(self.CFID);
+  end
+  
   def rate
-    return 4.0    
+    if rate_info().nil?
+      return 0.0
+    else
+      return rate_info.overallrate
+    end
+  end
+  
+  def full_address
+    address + ', ' + city + ', ' + province + ' ' + postcode
   end
   
   def as_json(options={})
-    super(:methods => [:full_name, :status, :rate])
+    super(:methods => [:full_name, :full_address, :status, :rate])
   end
 end

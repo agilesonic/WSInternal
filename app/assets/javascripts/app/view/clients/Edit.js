@@ -48,6 +48,28 @@ Ext.define('WSIS.view.clients.Edit', {
 	    	border: 0,
 	    	items: [{
 		        xtype: 'textfield',
+		        name : 'address',
+		        fieldLabel: 'Address',
+		        width: '500px',
+		        readOnly: true
+	    	}, {
+	    		xtype: 'button',
+	    		name: 'btnAddressEdit',
+	    		id: 'btnAddressEdit',
+	    		margin: '0 20 0 20',
+	    		text: 'Edit'
+	    	}, {
+	    		xtype: 'button',
+	    		name: 'btnMap',
+	    		id: 'btnMap',
+	    		margin: '0 20 0 0',
+	    		text: 'Map'
+	    	}]
+	    }, {
+	    	layout: 'hbox',
+	    	border: 0,
+	    	items: [{
+		        xtype: 'textfield',
 		        name : 'email',
 		        fieldLabel: 'Email'
 	    	}]
@@ -77,11 +99,12 @@ Ext.define('WSIS.view.clients.Edit', {
 			this.down("[name='honorific']").setValue(this.client.honorific);    		
 			this.down("[name='firstName']").setValue(this.client.firstname);    		
 			this.down("[name='lastName']").setValue(this.client.lastname);    		
+			this.down("[name='address']").setValue(this.client.full_address);    		
 			this.down("[name='email']").setValue(this.client.email);
 			this.setTitle(this.client.CFID + " " + this.client.firstname + " " + this.client.lastname);
 			this.child('#overview').update({
 				fullName: this.client.full_name,
-				status: this.client.status,
+				status: this.getStatus(),
 				rate: this.client.rate
 			});
 			
@@ -90,6 +113,7 @@ Ext.define('WSIS.view.clients.Edit', {
 			this.down("[name='honorific']").setValue('');    		
 			this.down("[name='firstName']").setValue('');    		
 			this.down("[name='lastName']").setValue('');    		
+			this.down("[name='address']").setValue('');    		
 			this.down("[name='email']").setValue('');    		
 			this.setTitle("Client detail"); 
 			this.child('#overview').hide();		
@@ -102,5 +126,12 @@ Ext.define('WSIS.view.clients.Edit', {
     	this.client.lastname = this.down("[name='lastName']").getValue();
     	this.client.email = this.down("[name='email']").getValue();
     	return this.client;
+    },
+    
+    getStatus: function() {
+    	if( 'Normal' == this.client.status ) return "Normal client";
+    	if( 'Moved' == this.client.status ) return "Client moved";
+    	return "";
     }
+    
 });

@@ -1,6 +1,6 @@
 Ext.define('WSIS.model.ClientDetail', {
     extend: 'Ext.data.Model',
-    fields: ['CFID', 'honorific', 'firstname', 'lastname', 'email', 'full_name', 'status', 'rate'],
+    fields: ['CFID', 'honorific', 'firstname', 'lastname', 'email', 'full_name', 'full_address', 'status', 'rate'],
     idProperty: 'CFID',
 
     proxy: {
